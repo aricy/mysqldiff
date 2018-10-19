@@ -633,7 +633,7 @@ class SQLTransformer(object):
             if col_data[_COLUMN_EXTRA].upper() != "AUTO_INCREMENT":
                 values['extra'] = " %s" % col_data[_COLUMN_EXTRA]
         if len(col_data[_COLUMN_COMMENT]) > 0:
-            values['comment'] = " COMMENT '%s'" % col_data[_COLUMN_COMMENT]
+            values['comment'] = " COMMENT '%s'" % col_data[_COLUMN_COMMENT].replace("'","\\'")
         return col_fmt % values
 
     @staticmethod
@@ -1034,7 +1034,7 @@ class SQLTransformer(object):
             if index[2] == "PRIMARY":
                 drop_indexes.append("  DROP PRIMARY KEY")
             elif index[2] not in drop_idx_recorded:
-                drop_indexes.append("  DROP INDEX %s" % index[2])
+                drop_indexes.append("  DROP INDEX `%s`" % index[2])
                 drop_idx_recorded.append(index[2])
         # Generate ADD index clauses
         if len(add_idx) > 0:

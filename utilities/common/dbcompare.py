@@ -277,7 +277,9 @@ def get_common_lists(list1, list2):
     """
     s1 = set(list1)
     s2 = set(list2)
+    # list1 dest
     ps1 = copy.copy(list1)
+    # list2 source
     ps2 = copy.copy(list2)
     both = list(s1 & s2)
     for i in both:
@@ -286,13 +288,23 @@ def get_common_lists(list1, list2):
         ps2.remove(i)
     # index , index same ,col type different
     add_idx_col = []
+    #print "list1",list1
+    #print "list2",list2
+    #print "ps2",ps2
+    #print "both",both
     if len(ps1) > 0 and len(ps1[0]) == 13 :
         for i in ps1:
             for j in ps2:
                 if i[2] == j[2]:
                     add_idx_col.append(i[2])
+    if len(ps1) == 0:
+        for i in ps2:
+            add_idx_col.append(i[2])
+            for j in list1:
+                if i[2] == j[2]:
+                    ps1 = ps2
     add_idx = []
-#    print "xxxps2",ps2
+    #print "add_idx_col",add_idx_col
     if len(add_idx_col) > 0:
         for i in add_idx_col:
             for j in list2:
