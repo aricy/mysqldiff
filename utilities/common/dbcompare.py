@@ -297,7 +297,7 @@ def get_common_lists(list1, list2):
             for j in ps2:
                 if i[2] == j[2]:
                     add_idx_col.append(i[2])
-    if len(ps1) == 0:
+    if len(ps1) == 0 and len(ps2) > 0 and len(ps2[0]) == 13:
         for i in ps2:
             add_idx_col.append(i[2])
             for j in list1:
